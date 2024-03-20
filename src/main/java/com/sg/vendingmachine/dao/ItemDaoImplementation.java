@@ -110,7 +110,7 @@ public class ItemDaoImplementation implements ItemDao {
         return itemAsText;
     }
 
-    private void writeRoster() throws VendingMachinePersistenceException {
+    private void writeItems() throws VendingMachinePersistenceException {
 
         PrintWriter out;
 
