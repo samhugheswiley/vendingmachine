@@ -24,7 +24,7 @@ public class VendingMachineServiceImplementation implements VendingMachineServic
 
 
     @Override
-    public void createItem(Item item) throws NoItemInventoryException {
+    public void createItem(Item item) throws VendingMachinePersistenceException {
         if (dao.addItem(item.getName(), item) != null) {
             throw new VendingMachinePersistenceException(
                     "ERROR");

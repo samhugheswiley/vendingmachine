@@ -12,7 +12,7 @@ public interface VendingMachineService {
 
     // For Items
     void createItem(Item item) throws
-            NoItemInventoryException;
+            VendingMachinePersistenceException;
 
     List<Item> getAllItems() throws
             VendingMachinePersistenceException;
