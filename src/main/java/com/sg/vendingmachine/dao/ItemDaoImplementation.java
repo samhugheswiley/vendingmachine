@@ -3,9 +3,7 @@ package com.sg.vendingmachine.dao;
 import com.sg.vendingmachine.dto.Change;
 import com.sg.vendingmachine.dto.Item;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.*;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
@@ -53,7 +51,6 @@ public class ItemDaoImplementation implements ItemDao {
         String[] itemTokens = itemAsText.split(DELIMITER);
 
         String itemID = itemTokens[0];
-
 
         Item itemFromFile = new Item(itemID);
 
@@ -111,6 +108,30 @@ public class ItemDaoImplementation implements ItemDao {
 
         // We have now turned a student to text! Return it!
         return itemAsText;
+    }
+
+    private void writeRoster() throws VendingMachinePersistenceException {
+
+        PrintWriter out;
+
+        try {
+            out = new PrintWriter(new FileWriter(ITEMS_FILE));
+        } catch (IOException e) {
+            throw new VendingMachinePersistenceException(
+                    "Could not save item data.", e);
+        }
+        String itemAsText;
+        List<Item> itemsList = this.getAllItems();
+        for (Item currentItem : itemsList) {
+            // turn a Student into a String
+            itemAsText = marshallItem(currentItem);
+            // write the Student object to the file
+            out.println(itemAsText);
+            // force PrintWriter to write line to the file
+            out.flush();
+        }
+        // Clean up
+        out.close();
     }
 
 
