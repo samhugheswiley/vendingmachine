@@ -30,3 +30,5 @@ sound
 can always just include a text file in here as a chat room as wwell
 
 yeah good idea, I'll put it below items.txt in the vending machine folder
+
+added
