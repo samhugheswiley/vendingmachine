@@ -13,11 +13,12 @@ import java.util.List;
 
 public class VendingMachineController {
 
-    private UserIO io = new UserIOConsoleImpl();
     private VendingMachineService service;
+    private VendingMachineView view;
 
-    public VendingMachineController(VendingMachineService service) {
+    public VendingMachineController(VendingMachineService service, VendingMachineView view) {
         this.service = service;
+        this.view = view;
     }
 
     public void run() {
@@ -25,13 +26,15 @@ public class VendingMachineController {
         int menuSelection = 0;
         while (keepGoing) {
             try {
-                List<Item> itemList = service.getAllItems();
-                displayItems(itemList);
-                menuSelection = getMenuSelection();
+                List<Item> itemList = service.getItems();
+                menuSelection = view.displayItems(itemList);
 
                 switch (menuSelection) {
                     case 1:
-                        vendItem();
+                        Integer[] coinCounts = view.insertCoin();
+                        BigDecimal userMoney = calculateUserMoney(coinCounts);
+                        String itemName = view.pickItem();
+                        service.vendItem(itemName, userMoney);
                         break;
                     case 2:
                         keepGoing = false;
@@ -40,12 +43,14 @@ public class VendingMachineController {
                         unknownCommand();
                 }
             } catch (InsufficientFundsException | NoItemInventoryException e) {
-                io.print(e.getMessage());
-            } catch (VendingMachinePersistenceException e) {
-                throw new RuntimeException(e);
+                view.displayErrorMessage(e.getMessage());
             }
         }
         exitMessage();
+    }
+
+    private BigDecimal calculateUserMoney(Integer[] coinCounts) {
+        // Implement money calculation logic here
     }
 
     private void displayItems(List<Item> itemList) {
