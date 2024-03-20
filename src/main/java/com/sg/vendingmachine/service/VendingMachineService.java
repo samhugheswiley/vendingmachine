@@ -18,6 +18,8 @@ public interface VendingMachineService {
 
     Item removeItem(String itemName);
 
+    Change calculateChange(BigDecimal userMoney, BigDecimal itemCost);
+
     // For Coins
 
     void insertCoin(Coin coin);
