@@ -1,6 +1,7 @@
 package com.sg.vendingmachine.controller;
 
 import com.sg.vendingmachine.dao.VendingMachinePersistenceException;
+import com.sg.vendingmachine.dto.Coin;
 import com.sg.vendingmachine.dto.Item;
 import com.sg.vendingmachine.service.InsufficientFundsException;
 import com.sg.vendingmachine.service.NoItemInventoryException;

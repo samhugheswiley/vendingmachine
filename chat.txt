@@ -1,0 +1,32 @@
+hello sam, this is bruce
+I'll leave it open for a bit sam so '
+breakout rooms
+        accidentally closed it
+
+ah no worries, the name coming up is waysi, not sure why :)
+windows username?
+
+ah could be
+am I all good to close it?
+
+        will it stay up?
+
+So I can push the files, and then the files will all be in the repo, but the like thing we're using here won't be
+        sure
+
+
+what have we got left to do still
+
+Errrm, I think we're quite close, I think we need to do some stuf with the change class becuase it's not doing anything really, and add some tests. What I would suggest is, I'll push this to main
+and then I'll make a branch as like a backup, so if people want to work on the main branch that's fine, or if people want to essentially fork and work on it themselves they can also?
+and then can merge changes later
+
+
+        sounds good
+        Sweet, I'll delete this, push to main, and make some branches, have a good evening!
+
+if you've got a problem email me if you need  I think it's bmcdona2@wiley.com
+sound
+can always just include a text file in here as a chat room as wwell
+
+yeah good idea, I'll put it below items.txt in the vending machine folder
