@@ -48,7 +48,7 @@ public class ItemDaoImplementation implements ItemDao {
     }
 
 
-    private Item unmarshallStudent(String itemAsText){
+    private Item unmarshallItem(String itemAsText){
 
         String[] itemTokens = itemAsText.split(DELIMITER);
 
@@ -86,7 +86,7 @@ public class ItemDaoImplementation implements ItemDao {
         Item currentItem;
         while (scanner.hasNextLine()) {
             currentLine = scanner.nextLine();
-            currentItem = unmarshallStudent(currentLine);
+            currentItem = unmarshallItem(currentLine);
 
             items.put(currentItem.getName(), currentItem);
         }
