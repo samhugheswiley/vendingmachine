@@ -25,7 +25,12 @@ public class VendingMachineServiceImplementation implements VendingMachineServic
 
     @Override
     public void createItem(Item item) throws NoItemInventoryException {
-
+        if (dao.addItem(item.getName(), item) != null) {
+            throw new ClassRosterDuplicateIdException(
+                    "ERROR: Could not create student.  Student Id "
+                            + student.getStudentId()
+                            + " already exists");
+        }
 
 
 
@@ -33,7 +38,7 @@ public class VendingMachineServiceImplementation implements VendingMachineServic
 
     @Override
     public List<Item> getAllItems() throws VendingMachinePersistenceException {
-        return null;
+         return dao.getAllItems();
     }
 
     @Override
