@@ -1,4 +1,4 @@
 package com.sg.vendingmachine.service;
 
-public class VendingMachineServiceImplementation {
+public class VendingMachineServiceImplementation implements  {
 }

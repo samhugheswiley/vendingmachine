@@ -4,6 +4,7 @@ import com.sg.vendingmachine.dto.Change;
 import com.sg.vendingmachine.dto.Coin;
 import com.sg.vendingmachine.dto.Item;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface VendingMachineService {
@@ -22,7 +23,10 @@ public interface VendingMachineService {
     void insertCoin(Coin coin);
 
 
-    // For Change
-    List<Change> changeToReturn();
+    Change calculateChange(BigDecimal userMoney, BigDecimal itemCost);
+
+    void vendItem(String itemName, BigDecimal userMoney) throws
+            InsufficientFundsException;
+
 
 }
