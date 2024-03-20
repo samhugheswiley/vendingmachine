@@ -1,5 +1,7 @@
 package com.sg.vendingmachine.service;
 
+import com.sg.vendingmachine.dao.ItemDao;
+import com.sg.vendingmachine.dao.VendingAuditDao;
 import com.sg.vendingmachine.dto.Change;
 import com.sg.vendingmachine.dto.Coin;
 import com.sg.vendingmachine.dto.Item;
@@ -8,6 +10,15 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public class VendingMachineServiceImplementation implements VendingMachineService {
+
+    private VendingAuditDao auditDao;
+    ItemDao dao;
+
+    public VendingMachineServiceImplementation(VendingAuditDao auditDao, ItemDao dao) {
+        this.auditDao = auditDao;
+        this.dao = dao;
+    }
+
     @Override
     public void addItem(Item item) {
 
