@@ -1,4 +1,4 @@
 package com.sg.vendingmachine.service;
 
-public class NoItemInventoryException {
+public class NoItemInventoryException extends Throwable {
 }

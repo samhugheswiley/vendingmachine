@@ -24,7 +24,7 @@ public class VendingMachineController {
         int menuSelection = 0;
         while (keepGoing) {
             try {
-                List<Item> itemList = service.getItems();
+                List<Item> itemList = service.getAllItems();
                 displayItems(itemList);
                 menuSelection = getMenuSelection();
 

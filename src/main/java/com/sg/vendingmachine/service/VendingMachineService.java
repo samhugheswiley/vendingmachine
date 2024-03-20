@@ -1,5 +1,6 @@
 package com.sg.vendingmachine.service;
 
+import com.sg.vendingmachine.dao.VendingMachinePersistenceException;
 import com.sg.vendingmachine.dto.Change;
 import com.sg.vendingmachine.dto.Coin;
 import com.sg.vendingmachine.dto.Item;
@@ -10,22 +11,26 @@ import java.util.List;
 public interface VendingMachineService {
 
     // For Items
-    void addItem(Item item);
+    void addItem(Item item) throws
+            NoItemInventoryException;
 
-    List<Item> getAllItems();
+    List<Item> getAllItems() throws
+            VendingMachinePersistenceException;
 
-    Item getItem(String itemName);
+    Item getItem(String itemName) throws
+            NoItemInventoryException;
 
-    Item removeItem(String itemName);
-
-    Change calculateChange(BigDecimal userMoney, BigDecimal itemCost);
-
-    // For Coins
-
-    void insertCoin(Coin coin);
+    Item removeItem(String itemName) throws
+            VendingMachinePersistenceException;
 
 
-    Change calculateChange(BigDecimal userMoney, BigDecimal itemCost);
+// Not sure this is needed
+    void insertCoin(Coin coin) throws
+            VendingMachinePersistenceException;
+
+
+    Change calculateChange(BigDecimal userMoney, BigDecimal itemCost) throws
+            VendingMachinePersistenceException;
 
     void vendItem(String itemName, BigDecimal userMoney) throws
             InsufficientFundsException;
