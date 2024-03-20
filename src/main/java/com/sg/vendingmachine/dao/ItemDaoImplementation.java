@@ -5,10 +5,7 @@ import com.sg.vendingmachine.dto.Item;
 
 import java.io.*;
 import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class ItemDaoImplementation implements ItemDao {
 
@@ -21,30 +18,40 @@ public class ItemDaoImplementation implements ItemDao {
     @Override
     public Item addItem(String itemName, Item item) throws VendingMachinePersistenceException {
 
-
-        return null;
+        loadItems();
+        Item newItem = items.put(itemName, item);
+        writeItems();
+        return newItem;
     }
 
     @Override
     public List<Item> getAllItems() throws VendingMachinePersistenceException {
-        return null;
+
+        loadItems();
+        return new ArrayList(items.values());
     }
 
     @Override
     public Item getItem(String itemName) throws VendingMachinePersistenceException {
-        return null;
+
+        loadItems();
+        return items.get(itemName);
+
     }
 
     @Override
     public Item removeItem(String itemName) throws VendingMachinePersistenceException {
-        return null;
+
+        loadItems();
+        Item removedItem = items.remove(itemName);
+        writeItems();
+        return removedItem;
     }
 
     @Override
     public Change getChange() throws VendingMachinePersistenceException {
         return null;
     }
-
 
     private Item unmarshallItem(String itemAsText){
 
