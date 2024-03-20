@@ -4,14 +4,14 @@ public class Change {
     private int quarters, dimes, nickels, pennies;
 
     public Change(int changeInPennies) {
-        quarters = changeInPennies / 25;
-        changeInPennies %= 25;
+        quarters = changeInPennies / Coin.QUARTER.getValue();
+        changeInPennies %= Coin.QUARTER.getValue();
 
-        dimes = changeInPennies / 10;
-        changeInPennies %= 10;
+        dimes = changeInPennies / Coin.DIME.getValue();
+        changeInPennies %= Coin.DIME.getValue();
 
-        nickels = changeInPennies / 5;
-        changeInPennies %= 5;
+        nickels = changeInPennies / Coin.NICKEL.getValue();
+        changeInPennies %= Coin.NICKEL.getValue();
 
         pennies = changeInPennies;
     }
