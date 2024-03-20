@@ -53,6 +53,18 @@ public class ItemDaoImplementation implements ItemDao {
         return null;
     }
 
+    @Override
+    public void updateItem(Item item) throws VendingMachinePersistenceException {
+        // Load items from file
+        loadItems();
+
+        // Replace the old item with the updated item in the map
+        items.put(item.getName(), item);
+
+        // Write the updated items back to the file
+        writeItems();
+    }
+
     private Item unmarshallItem(String itemAsText){
 
         String[] itemTokens = itemAsText.split(DELIMITER);

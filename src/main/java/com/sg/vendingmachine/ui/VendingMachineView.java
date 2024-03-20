@@ -31,4 +31,26 @@ public class VendingMachineView {
     public String pickItem(){
        return UI.readString("Please an item from the vending machine");
     }
+
+    public int getMenuSelection() {
+        return UI.readInt("Enter your choice: ");
+    }
+
+    public void displaySuccess(String message) {
+        UI.print("SUCCESS: " + message);
+    }
+
+
+
+    public void unknownCommand(String message) {
+        UI.print("Unknown Command " + message);
+    }
+
+    public void exitMessage(String message) {
+        UI.print("Good Bye " + message);
+    }
+
+
+
+
 }

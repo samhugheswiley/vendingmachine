@@ -27,4 +27,7 @@ public interface ItemDao {
     Change getChange()
         throws VendingMachinePersistenceException;
 
+    void updateItem(Item item)
+            throws VendingMachinePersistenceException;
+
 }

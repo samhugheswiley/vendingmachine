@@ -33,7 +33,7 @@ public interface VendingMachineService {
             VendingMachinePersistenceException;
 
     void vendItem(String itemName, BigDecimal userMoney) throws
-            InsufficientFundsException;
+            InsufficientFundsException, NoItemInventoryException;
 
 
 }

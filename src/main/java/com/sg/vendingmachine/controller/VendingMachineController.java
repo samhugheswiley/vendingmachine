@@ -63,8 +63,12 @@ public class VendingMachineController {
     }
 
     private void displayItems() {
-        List<Item> itemList = service.getAllItems();
-        view.displayItems(itemList);
+        try {
+            List<Item> itemList = service.getAllItems();
+            view.displayItems(itemList);
+        } catch (VendingMachinePersistenceException e) {
+            view.displayErrorMessage("Error retrieving items: " + e.getMessage());
+        }
     }
 
     private int getMenuSelection() {
@@ -77,7 +81,7 @@ public class VendingMachineController {
         String itemName = view.pickItem();
         try {
             service.vendItem(itemName, userMoney);
-            view.displaySuccess("Item successfully vended");
+            view.displaySuccess("Item successfully vended!");
         } catch (InsufficientFundsException e) {
             view.displayErrorMessage("Insufficient funds. Please insert more coins.");
         } catch (NoItemInventoryException e) {
@@ -87,10 +91,10 @@ public class VendingMachineController {
 
 
     private void unknownCommand() {
-        io.print("Unknown Command");
+        view.unknownCommand("Unknown Command");
     }
 
     private void exitMessage() {
-        io.print("Good Bye");
+        view.exitMessage("Good Bye");
     }
 }

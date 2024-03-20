@@ -70,12 +70,16 @@ public class VendingMachineServiceImplementation implements VendingMachineServic
     }
 
     @Override
-    public void vendItem(String itemName, BigDecimal userMoney) throws InsufficientFundsException {
+    public void vendItem(String itemName, BigDecimal userMoney) throws InsufficientFundsException, NoItemInventoryException {
         Item item = getItem(itemName);
         if (item.getCost().compareTo(userMoney) > 0) {
             throw new InsufficientFundsException("Insufficient funds");
         }
+        if (item.getInventory() <= 0) {
+            throw new NoItemInventoryException("Item is out of stock");
+        }
         item.setInventory(item.getInventory() - 1);
         dao.updateItem(item);
     }
+
 }
