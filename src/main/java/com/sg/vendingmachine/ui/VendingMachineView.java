@@ -11,6 +11,9 @@ public class VendingMachineView {
         this.UI = i;
 
     }
+    public void displayErrorMessage(String m){
+        UI.print(m);
+    }
    public int displayItems(List<Item> items) {
        UI.print("==============Vending Machine Items=============================================");
        items.forEach(i -> UI.print("Name: " + i.getName() + " Cost: " + i.getCost().toString() + " Amount Left: " + String.valueOf(i.getInventory()) + "\n"));
