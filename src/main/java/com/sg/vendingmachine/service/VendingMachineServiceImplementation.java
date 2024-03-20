@@ -43,12 +43,17 @@ public class VendingMachineServiceImplementation implements VendingMachineServic
 
     @Override
     public Item getItem(String itemName) throws NoItemInventoryException {
-        return null;
+        Item item = dao.getItem(itemName);
+        if (item == null) {
+            throw new NoItemInventoryException("Item can't be null");
+        }
+        return item;
     }
+
 
     @Override
     public Item removeItem(String itemName) throws VendingMachinePersistenceException {
-        return null;
+        return dao.removeItem(itemName);
     }
 
     @Override
