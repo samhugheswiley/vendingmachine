@@ -1,5 +1,6 @@
 package com.sg.vendingmachine.controller;
 
+import com.sg.vendingmachine.dao.VendingMachinePersistenceException;
 import com.sg.vendingmachine.dto.Item;
 import com.sg.vendingmachine.service.InsufficientFundsException;
 import com.sg.vendingmachine.service.NoItemInventoryException;
@@ -40,6 +41,8 @@ public class VendingMachineController {
                 }
             } catch (InsufficientFundsException | NoItemInventoryException e) {
                 io.print(e.getMessage());
+            } catch (VendingMachinePersistenceException e) {
+                throw new RuntimeException(e);
             }
         }
         exitMessage();
@@ -50,6 +53,7 @@ public class VendingMachineController {
     }
 
     private int getMenuSelection() {
+        return 0;
         // To Implement
     }
 
