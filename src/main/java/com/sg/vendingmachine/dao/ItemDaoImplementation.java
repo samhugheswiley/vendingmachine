@@ -70,6 +70,7 @@ public class ItemDaoImplementation implements ItemDao {
         // We have now created a student! Return it!
         return itemFromFile;
     }
+
     private void loadItems() throws VendingMachinePersistenceException {
         Scanner scanner;
 
@@ -91,6 +92,25 @@ public class ItemDaoImplementation implements ItemDao {
             items.put(currentItem.getName(), currentItem);
         }
         scanner.close();
+    }
+
+    private String marshallItem(Item ourItem){
+
+        String itemAsText = ourItem.getName() + DELIMITER;
+
+        // add the rest of the properties in the correct order:
+
+        // item Name
+        itemAsText += ourItem.getName() + DELIMITER;
+
+        // item Value
+        itemAsText += ourItem.getCost() + DELIMITER;
+
+        // item quantity
+        itemAsText += ourItem.getInventory();
+
+        // We have now turned a student to text! Return it!
+        return itemAsText;
     }
 
 
