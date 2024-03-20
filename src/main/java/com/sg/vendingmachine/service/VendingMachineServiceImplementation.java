@@ -26,10 +26,13 @@ public class VendingMachineServiceImplementation implements VendingMachineServic
     @Override
     public void createItem(Item item) throws NoItemInventoryException {
         if (dao.addItem(item.getName(), item) != null) {
-            throw new ClassRosterDuplicateIdException(
-                    "ERROR: Could not create student.  Student Id "
+            throw new VendingMachinePersistenceException(
+                    "ERROR");
+            /*
+            "ERROR: Could not create student.  Student Id "
                             + student.getStudentId()
                             + " already exists");
+             */
         }
 
 
@@ -63,11 +66,18 @@ public class VendingMachineServiceImplementation implements VendingMachineServic
 
     @Override
     public Change calculateChange(BigDecimal userMoney, BigDecimal itemCost) throws VendingMachinePersistenceException {
-        return null;
+        BigDecimal change = userMoney.subtract(itemCost);
+        int changeInPennies = change.multiply(new BigDecimal("100")).intValueExact();
+        return new Change(changeInPennies);
     }
 
     @Override
     public void vendItem(String itemName, BigDecimal userMoney) throws InsufficientFundsException {
-
+        Item item = getItem(itemName);
+        if (item.getCost().compareTo(userMoney) > 0) {
+            throw new InsufficientFundsException("Insufficient funds");
+        }
+        item.setInventory(item.getInventory() - 1);
+        dao.updateItem(item);
     }
 }
