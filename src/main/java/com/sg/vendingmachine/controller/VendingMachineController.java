@@ -53,21 +53,37 @@ public class VendingMachineController {
     }
 
     private BigDecimal calculateUserMoney(Integer[] coinCounts) {
-        // Implement money calculation logic here
+        BigDecimal total = BigDecimal.ZERO;
+        total = total.add(BigDecimal.valueOf(coinCounts[0] * Coin.QUARTER.getValue()));
+        total = total.add(BigDecimal.valueOf(coinCounts[1] * Coin.NICKEL.getValue()));
+        total = total.add(BigDecimal.valueOf(coinCounts[2] * Coin.DIME.getValue()));
+        total = total.add(BigDecimal.valueOf(coinCounts[3] * Coin.PENNY.getValue()));
+        return total.divide(BigDecimal.valueOf(100)); // Convert pennies to dollars
     }
 
-    private void displayItems(List<Item> itemList) {
-        // To Implement
+    private void displayItems() {
+        List<Item> itemList = service.getAllItems();
+        view.displayItems(itemList);
     }
 
     private int getMenuSelection() {
-        return 0;
-        // To Implement
+        return view.getMenuSelection();
     }
 
-    private void vendItem() throws InsufficientFundsException, NoItemInventoryException {
-        // To Implement
+    private void vendItem() {
+        Integer[] coinCounts = view.insertCoin();
+        BigDecimal userMoney = calculateUserMoney(coinCounts);
+        String itemName = view.pickItem();
+        try {
+            service.vendItem(itemName, userMoney);
+            view.displaySuccess("Item successfully vended");
+        } catch (InsufficientFundsException e) {
+            view.displayErrorMessage("Insufficient funds. Please insert more coins.");
+        } catch (NoItemInventoryException e) {
+            view.displayErrorMessage("Item is out of stock.");
+        }
     }
+
 
     private void unknownCommand() {
         io.print("Unknown Command");
