@@ -13,8 +13,15 @@ public class VendingMachineView {
        int input = UI.readInt("Enter 1 to pick your item or 2 to quit");
         return input;
    }
-   public String insertCoin(){
-       
-      return UI.readString("Enter coins Q for Quarter,N for Nickel,D for dime,N for nickel");
-   }
+    public Integer[] insertCoin() {
+        Integer[] coinCounts = new Integer[4];
+        coinCounts[0] = UI.readInt("How many Quarters do you wanna put in");
+        coinCounts[1] = UI.readInt("How many Nickels do you wanna put in");
+        coinCounts[2] = UI.readInt("How many Dimes do you wanna put in");
+        coinCounts[3] = UI.readInt("How many Pennies do you wanna put in");
+        return coinCounts;
+    }
+    public String pickItem(){
+       return UI.readString("Please an item from the vending machine");
+    }
 }
