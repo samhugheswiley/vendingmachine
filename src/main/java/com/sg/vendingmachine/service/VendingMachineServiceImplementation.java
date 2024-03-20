@@ -35,8 +35,6 @@ public class VendingMachineServiceImplementation implements VendingMachineServic
              */
         }
 
-
-
     }
 
     @Override

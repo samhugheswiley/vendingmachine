@@ -27,7 +27,7 @@ public class VendingMachineController {
         int menuSelection = 0;
         while (keepGoing) {
             try {
-                List<Item> itemList = service.getItems();
+                List<Item> itemList = service.getAllItems();
                 menuSelection = view.displayItems(itemList);
 
                 switch (menuSelection) {
@@ -43,8 +43,10 @@ public class VendingMachineController {
                     default:
                         unknownCommand();
                 }
-            } catch (InsufficientFundsException | NoItemInventoryException e) {
+            } catch (InsufficientFundsException e) {
                 view.displayErrorMessage(e.getMessage());
+            } catch (VendingMachinePersistenceException e) {
+                throw new RuntimeException(e);
             }
         }
         exitMessage();
