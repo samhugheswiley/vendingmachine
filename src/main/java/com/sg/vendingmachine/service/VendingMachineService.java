@@ -11,7 +11,7 @@ import java.util.List;
 public interface VendingMachineService {
 
     // For Items
-    void addItem(Item item) throws
+    void createItem(Item item) throws
             NoItemInventoryException;
 
     List<Item> getAllItems() throws
