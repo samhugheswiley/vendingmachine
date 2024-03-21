@@ -50,5 +50,6 @@ public class VendingMachineView {
 
     public void displayErrorMessage() {
         UI.print("=== ERROR ===");
+        //Test - delete
     }
 }
