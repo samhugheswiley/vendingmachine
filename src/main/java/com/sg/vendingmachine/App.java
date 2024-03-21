@@ -12,17 +12,25 @@ import com.sg.vendingmachine.service.VendingMachineServiceImplementation;
 import com.sg.vendingmachine.ui.UserIO;
 import com.sg.vendingmachine.ui.UserIOConsoleImpl;
 import com.sg.vendingmachine.ui.VendingMachineView;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class App {
     public static void main(String[] args) throws NoItemInventoryException {
-        UserIO io = new UserIOConsoleImpl();
-        VendingMachineView VendingMachineView = new VendingMachineView(io);
-        ItemDao myDao = new ItemDaoImplementation();
-        VendingAuditDao myAudit = new AuditDao();
-        VendingMachineService Service = new VendingMachineServiceImplementation(myAudit,myDao);
-        VendingMachineController vendingMachine = new VendingMachineController(Service,VendingMachineView);
+//        UserIO io = new UserIOConsoleImpl();
+//        VendingMachineView VendingMachineView = new VendingMachineView(io);
+//        ItemDao myDao = new ItemDaoImplementation();
+//        VendingAuditDao myAudit = new AuditDao();
+//        VendingMachineService Service = new VendingMachineServiceImplementation(myAudit,myDao);
+//        VendingMachineController vendingMachine = new VendingMachineController(Service,VendingMachineView);
+//        vendingMachine.run();
+
+        AnnotationConfigApplicationContext appContext = new AnnotationConfigApplicationContext();
+        appContext.scan("com.sg.vendingmachine");
+        appContext.refresh();
+
+        VendingMachineController controller = appContext.getBean("vendingMachineController", VendingMachineController.class);
+        controller.run();
 
 
-        vendingMachine.run();
     }
 }

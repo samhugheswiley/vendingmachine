@@ -2,11 +2,12 @@ package com.sg.vendingmachine.dao;
 
 import com.sg.vendingmachine.dto.Change;
 import com.sg.vendingmachine.dto.Item;
+import org.springframework.stereotype.Component;
 
 import java.io.*;
 import java.math.BigDecimal;
 import java.util.*;
-
+@Component
 public class ItemDaoImplementation implements ItemDao {
 
 
