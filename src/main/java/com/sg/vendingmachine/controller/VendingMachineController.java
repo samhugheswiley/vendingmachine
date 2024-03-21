@@ -9,15 +9,18 @@ import com.sg.vendingmachine.service.VendingMachineService;
 import com.sg.vendingmachine.ui.UserIO;
 import com.sg.vendingmachine.ui.UserIOConsoleImpl;
 import com.sg.vendingmachine.ui.VendingMachineView;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.List;
-
+@Component
 public class VendingMachineController {
 
     private VendingMachineService service;
     private VendingMachineView view;
 
+@Autowired
     public VendingMachineController(VendingMachineService service, VendingMachineView view) {
         this.service = service;
         this.view = view;
@@ -29,7 +32,7 @@ public class VendingMachineController {
         while (keepGoing) {
             try {
                 List<Item> itemList = service.getAllItems();
-                menuSelection = view.displayItems(itemList);
+                getMenuSelection();
 
                 switch (menuSelection) {
                     case 1:
@@ -68,8 +71,8 @@ public class VendingMachineController {
         view.displayItems(itemList);
     }
 
-    private int getMenuSelection() throws VendingMachinePersistenceException {
-        return view.displayItems(service.getAllItems());
+    private void getMenuSelection() throws VendingMachinePersistenceException {
+        view.displayItems(service.getAllItems());
     }
 
     private void vendItem() throws VendingMachinePersistenceException {

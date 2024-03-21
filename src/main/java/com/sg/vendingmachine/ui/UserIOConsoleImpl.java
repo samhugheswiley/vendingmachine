@@ -9,8 +9,11 @@ package com.sg.vendingmachine.ui;
  * May your view be ever in your favor!
  * @author ahill
  */
+import org.springframework.stereotype.Component;
+
 import java.util.Scanner;
 
+@Component
 public class UserIOConsoleImpl implements UserIO {
 
     final private Scanner console = new Scanner(System.in);

@@ -1,12 +1,16 @@
 package com.sg.vendingmachine.ui;
 
 import com.sg.vendingmachine.dto.Item;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.List;
 
+@Component
 public class VendingMachineView {
     private UserIO UI ;
+    @Autowired
     public VendingMachineView(UserIO i){
         this.UI = i;
 
@@ -14,10 +18,10 @@ public class VendingMachineView {
     public void displayErrorMessage(String m){
         UI.print(m);
     }
-   public int displayItems(List<Item> items) {
+   public void displayItems(List<Item> items) {
        UI.print("==============Vending Machine Items=============================================");
        items.forEach(i -> UI.print("Name: " + i.getName() + " Cost: " + i.getCost().toString() + " Amount Left: " + String.valueOf(i.getInventory()) + "\n"));
-      
+
    }
    public void displayItem(Item items){
         UI.print("Name: " + items.getName() + " Cost: " + items.getCost().toString() + " Amount Left: " + String.valueOf(items.getInventory()));

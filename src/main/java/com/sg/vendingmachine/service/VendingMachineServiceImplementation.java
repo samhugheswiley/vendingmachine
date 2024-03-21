@@ -6,15 +6,19 @@ import com.sg.vendingmachine.dao.VendingMachinePersistenceException;
 import com.sg.vendingmachine.dto.Change;
 import com.sg.vendingmachine.dto.Coin;
 import com.sg.vendingmachine.dto.Item;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.List;
 
+@Component
 public class VendingMachineServiceImplementation implements VendingMachineService {
 
     private VendingAuditDao auditDao;
     ItemDao dao;
 
+    @Autowired
     // Constructor
     public VendingMachineServiceImplementation(VendingAuditDao auditDao, ItemDao dao) {
         this.auditDao = auditDao;
