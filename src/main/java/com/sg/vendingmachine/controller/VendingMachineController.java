@@ -88,10 +88,10 @@ public class VendingMachineController {
 
 
     private void unknownCommand() {
-        // view.unknownCommand
+        view.displayUnknownCommandBanner();
     }
 
     private void exitMessage() {
-        // view.goodbye();
+        view.displayExitBanner();
     }
 }
