@@ -86,12 +86,11 @@ public class VendingMachineController {
         }
     }
 
-
     private void unknownCommand() {
-        view.displayUnknownCommandBanner();
+        // view.unknownCommand
     }
 
     private void exitMessage() {
-        view.displayExitBanner();
+        // view.goodbye();
     }
 }

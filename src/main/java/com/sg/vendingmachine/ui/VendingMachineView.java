@@ -14,19 +14,12 @@ public class VendingMachineView {
     public void displayErrorMessage(String m){
         UI.print(m);
     }
-   public int displayItems(List<Item> items) {
-       UI.print("==============Vending Machine Items=============================================");
-       items.forEach(i -> UI.print("Name: " + i.getName() + " Cost: " + i.getCost().toString() + " Amount Left: " + String.valueOf(i.getInventory()) + "\n"));
-      
-   }
-   public void displayItem(Item items){
-        UI.print("Name: " + items.getName() + " Cost: " + items.getCost().toString() + " Amount Left: " + String.valueOf(items.getInventory()));
-
-   }
-   public int getInput(){
-       int input = UI.readInt("Enter 1 to pick your item or 2 to quit");
-       return input;
-   }
+    public int displayItems(List<Item> items) {
+        UI.print("==============Vending Machine Items=============================================");
+        items.forEach(i -> UI.print("Name: " + i.getName() + " Cost: " + i.getCost().toString() + " Amount Left: " + String.valueOf(i.getInventory()) + "\n"));
+        int input = UI.readInt("Enter 1 to pick your item or 2 to quit");
+        return input;
+    }
     public Integer[] insertCoin() {
         Integer[] coinCounts = new Integer[4];
         coinCounts[0] = UI.readInt("How many Quarters do you wanna put in");
@@ -36,19 +29,25 @@ public class VendingMachineView {
         return coinCounts;
     }
     public String pickItem(){
-       return UI.readString("Please an item from the vending machine");
+        return UI.readString("Please an item from the vending machine");
+    }
+
+    public int getMenuSelection() {
+        return UI.readInt("Enter your choice: ");
+    }
+
+    public void displaySuccess(String message) {
+        UI.print("SUCCESS: " + message);
     }
 
 
-    public void displayExitBanner() {
-        UI.print("Good Bye!!!");
+
+    public void unknownCommand(String message) {
+        UI.print("Unknown Command " + message);
     }
 
-    public void displayUnknownCommandBanner() {
-        UI.print("Unknown Command!!!");
+    public void exitMessage(String message) {
+        UI.print("Good Bye " + message);
     }
 
-    public void displayErrorMessage() {
-        UI.print("=== ERROR ===");
-    }
 }
