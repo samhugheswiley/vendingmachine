@@ -18,22 +18,19 @@ public interface VendingMachineService {
             VendingMachinePersistenceException;
 
     Item getItem(String itemName) throws
-            NoItemInventoryException;
+            NoItemInventoryException, VendingMachinePersistenceException;
 
     Item removeItem(String itemName) throws
             VendingMachinePersistenceException;
 
 
 // Not sure this is needed
-    void insertCoin(Coin coin) throws
-            VendingMachinePersistenceException;
+    void insertCoin(Coin coin) throws VendingMachinePersistenceException;
 
 
-    Change calculateChange(BigDecimal userMoney, BigDecimal itemCost) throws
-            VendingMachinePersistenceException;
+    Change calculateChange(BigDecimal userMoney, BigDecimal itemCost) throws VendingMachinePersistenceException;
 
-    void vendItem(String itemName, BigDecimal userMoney) throws
-            InsufficientFundsException;
+    void vendItem(String itemName, BigDecimal userMoney) throws VendingMachinePersistenceException, InsufficientFundsException, NoItemInventoryException;
 
 
 }

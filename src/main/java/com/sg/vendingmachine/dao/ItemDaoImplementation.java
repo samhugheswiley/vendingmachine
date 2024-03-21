@@ -10,9 +10,11 @@ import java.util.*;
 public class ItemDaoImplementation implements ItemDao {
 
 
-    public static final String ITEMS_FILE = "items.txt";
+    public static final String ITEMS_FILE = "Items.txt";
     public static final String DELIMITER = ":";
     private Map<String, Item> items = new HashMap<>();
+
+    private List<Change> change = new ArrayList<>();
 
 
     @Override
@@ -36,7 +38,6 @@ public class ItemDaoImplementation implements ItemDao {
 
         loadItems();
         return items.get(itemName);
-
     }
 
     @Override
@@ -49,9 +50,31 @@ public class ItemDaoImplementation implements ItemDao {
     }
 
     @Override
-    public Change getChange() throws VendingMachinePersistenceException {
-        return null;
+    public Item removeStock(String itemName) throws VendingMachinePersistenceException {
+        loadItems();
+        int previousStock = items.get(itemName).getInventory();
+        items.get(itemName).setInventory(previousStock - 1);
+        writeItems();
+        return items.get(itemName);
     }
+
+
+    // Change stuff - this is basically the accessing to a Database
+    @Override
+    public List<Change> getListOfChange() throws VendingMachinePersistenceException {
+        return change;
+    }
+    public void addChange(Change change){
+        this.change.add(change);
+    }
+
+    public void removeChangeFromChangeList(BigDecimal itemPrice){
+        // need to add up the change value of our list of Change
+        // Then we take the Item price, and if enough change is in the change list
+        // we remove the change so that our new change is correct, if not return an exception saying not enough money
+        // or something
+    }
+
 
     private Item unmarshallItem(String itemAsText){
 
@@ -64,7 +87,7 @@ public class ItemDaoImplementation implements ItemDao {
         // Index 1 - Item Name
         itemFromFile.setName(itemTokens[0]);
 
-        // Index 2 - Price
+        // Index 2 - Price - Not working
         BigDecimal stringToBigDec = new BigDecimal(itemTokens[1]);
         itemFromFile.setCost(stringToBigDec);
 
@@ -100,7 +123,7 @@ public class ItemDaoImplementation implements ItemDao {
 
     private String marshallItem(Item ourItem){
 
-        String itemAsText = ourItem.getName() + DELIMITER;
+        String itemAsText = ""; // = ourItem.getName() + DELIMITER;
 
         // add the rest of the properties in the correct order:
 
@@ -113,7 +136,7 @@ public class ItemDaoImplementation implements ItemDao {
         // item quantity
         itemAsText += ourItem.getInventory();
 
-        // We have now turned a student to text! Return it!
+        // We have now turned an Item to text! Return it!
         return itemAsText;
     }
 
@@ -130,7 +153,7 @@ public class ItemDaoImplementation implements ItemDao {
         String itemAsText;
         List<Item> itemsList = this.getAllItems();
         for (Item currentItem : itemsList) {
-            // turn a Student into a String
+            // turn an Item into a String
             itemAsText = marshallItem(currentItem);
             // write the Student object to the file
             out.println(itemAsText);

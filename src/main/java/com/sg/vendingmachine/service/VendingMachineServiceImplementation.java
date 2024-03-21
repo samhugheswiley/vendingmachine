@@ -43,10 +43,10 @@ public class VendingMachineServiceImplementation implements VendingMachineServic
     }
 
     @Override
-    public Item getItem(String itemName) throws NoItemInventoryException {
+    public Item getItem(String itemName) throws NoItemInventoryException, VendingMachinePersistenceException {
         Item item = dao.getItem(itemName);
         if (item == null) {
-            throw new NoItemInventoryException("Item can't be null");
+            throw new NoItemInventoryException("Item can't be null: " + itemName);
         }
         return item;
     }
@@ -70,12 +70,12 @@ public class VendingMachineServiceImplementation implements VendingMachineServic
     }
 
     @Override
-    public void vendItem(String itemName, BigDecimal userMoney) throws InsufficientFundsException {
+    public void vendItem(String itemName, BigDecimal userMoney) throws InsufficientFundsException, NoItemInventoryException, VendingMachinePersistenceException {
         Item item = getItem(itemName);
         if (item.getCost().compareTo(userMoney) > 0) {
             throw new InsufficientFundsException("Insufficient funds");
         }
         item.setInventory(item.getInventory() - 1);
-        dao.updateItem(item);
+        dao.removeStock(itemName);
     }
 }

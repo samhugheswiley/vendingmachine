@@ -23,7 +23,7 @@ public class VendingMachineController {
         this.view = view;
     }
 
-    public void run() {
+    public void run() throws NoItemInventoryException {
         boolean keepGoing = true;
         int menuSelection = 0;
         while (keepGoing) {
@@ -33,6 +33,7 @@ public class VendingMachineController {
 
                 switch (menuSelection) {
                     case 1:
+                        // At the moment we're doing money via the controller instead of using a change class, this works but not totally sure is optimal
                         Integer[] coinCounts = view.insertCoin();
                         BigDecimal userMoney = calculateUserMoney(coinCounts);
                         String itemName = view.pickItem();
@@ -62,22 +63,22 @@ public class VendingMachineController {
         return total.divide(BigDecimal.valueOf(100)); // Convert pennies to dollars
     }
 
-    private void displayItems() {
+    private void displayItems() throws VendingMachinePersistenceException {
         List<Item> itemList = service.getAllItems();
         view.displayItems(itemList);
     }
 
-    private int getMenuSelection() {
-        return view.getMenuSelection();
+    private int getMenuSelection() throws VendingMachinePersistenceException {
+        return view.displayItems(service.getAllItems());
     }
 
-    private void vendItem() {
+    private void vendItem() throws VendingMachinePersistenceException {
         Integer[] coinCounts = view.insertCoin();
         BigDecimal userMoney = calculateUserMoney(coinCounts);
         String itemName = view.pickItem();
         try {
             service.vendItem(itemName, userMoney);
-            view.displaySuccess("Item successfully vended");
+            //view.displaySuccess("Item successfully vended");
         } catch (InsufficientFundsException e) {
             view.displayErrorMessage("Insufficient funds. Please insert more coins.");
         } catch (NoItemInventoryException e) {
@@ -87,10 +88,10 @@ public class VendingMachineController {
 
 
     private void unknownCommand() {
-        io.print("Unknown Command");
+        // view.unknownCommand
     }
 
     private void exitMessage() {
-        io.print("Good Bye");
+        // view.goodbye();
     }
 }

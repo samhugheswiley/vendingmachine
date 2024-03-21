@@ -24,7 +24,10 @@ public interface ItemDao {
     Item removeItem(String itemName)
         throws VendingMachinePersistenceException;
 
-    Change getChange()
-        throws VendingMachinePersistenceException;
+    Item removeStock(String itemName) throws VendingMachinePersistenceException;
 
+//    Change getChange()
+//        throws VendingMachinePersistenceException;
+
+    List<Change> getListOfChange() throws VendingMachinePersistenceException;
 }

@@ -1,10 +1,10 @@
-Snickers:1.50:10
 Coca-Cola:1.25:8
-Doritos:1.75:12
 KitKat:1.50:6
-Pepsi:1.25:9
-M&M's:1.50:10
-Lays:1.50:7
-Twix:1.50:5
+Snickers:1.50:6
 Sprite:1.25:11
+Twix:1.50:5
+Pepsi:1.25:9
+Lays:1.50:7
 Reese's:1.75:8
+Doritos:1.75:12
+M&M's:1.50:10
